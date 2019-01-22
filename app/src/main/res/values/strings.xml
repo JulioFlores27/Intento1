@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Prueba1</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lote">Lote</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="control_de_producci_n">Control de Producción:</string>
+    <string name="materia_prima">Materia Prima:</string>
+    <string name="buscar_materia_prima">Buscar Materia Prima</string>
+    <string name="agregar_otra_mp">Agregar otra MP</string>
+    <string name="terminar_ubicaci_n">Terminar Ubicación</string>
+</resources>

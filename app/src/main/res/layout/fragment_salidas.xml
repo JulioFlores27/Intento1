@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SalidasFragment"
+    android:id="@+id/swiperefrescar">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20pt"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/control_de_producci_n"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="5dp" />
+    <EditText
+        android:id="@+id/conprod2"
+        android:layout_width="75pt"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:layout_height="20pt"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="220dp"
+        android:autofillHints=""
+        android:layout_marginStart="220dp"
+        android:inputType="" tools:targetApi="o" />
+
+    <TextView
+        android:layout_width="210dp"
+        android:layout_height="20pt"
+        android:layout_gravity="left"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/materia_prima"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:layout_marginStart="5dp" />
+    <EditText
+        android:id="@+id/matpri2"
+        android:layout_width="75pt"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:layout_height="20pt"
+        android:textSize="15sp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="220dp"
+        android:inputType="textFilter"/>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="225dp">
+        <ListView
+            android:id="@+id/listasa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
+    </LinearLayout>
+    <LinearLayout  android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="125dp"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/b12"
+        android:layout_width="90pt"
+        android:layout_height="20pt"
+        android:layout_gravity="left"
+        android:text="@string/agregar_otra_mp" />
+    <Button
+        android:id="@+id/b22"
+        android:layout_width="90pt"
+        android:layout_height="20pt"
+        android:layout_gravity="right"
+        android:text="@string/terminar_ubicaci_n" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="87dp"
+            android:layout_marginTop="170dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/b32"
+                android:layout_width="90pt"
+                android:layout_height="20pt"
+                android:layout_marginLeft="105dp"
+                android:text="@string/buscar_materia_prima"
+                android:layout_marginStart="105dp" />
+        </LinearLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
