@@ -32,7 +32,7 @@
         android:layout_marginLeft="220dp"
         android:autofillHints=""
         android:layout_marginStart="220dp"
-        android:inputType="" />
+        android:inputType="numberDecimal" />
 
     <TextView
         android:layout_width="210dp"
@@ -57,7 +57,7 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_marginTop="225dp">
+        android:layout_marginTop="170dp">
         <ListView
             android:id="@+id/listasa"
             android:layout_width="wrap_content"
@@ -80,19 +80,5 @@
         android:layout_gravity="right"
         android:text="Terminar Ubicación" />
     </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:layout_marginTop="170dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/b32"
-                android:layout_width="90pt"
-                android:layout_height="20pt"
-                android:layout_marginLeft="105dp"
-                android:text="Buscar Materia Prima" />
-        </LinearLayout>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

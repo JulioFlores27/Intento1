@@ -98,13 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     ConteoFragment conteos = new ConteoFragment();
                     return conteos;
+                case 3:
+                    EntradaFragment movimientos = new EntradaFragment();
+                    return movimientos;
             }
             return null;
         }
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 4 total pages.
+            return 4;
         }
     }
 }

@@ -101,6 +101,6 @@ public class Almacen {
 
     @Override
     public String toString() {
-        return id + " " + rack + fila + columna + materiaprima + lotemp + cantidad + persona + observaciones + fechahora;
+        return id + " " + rack + fila + columna + " " + materiaprima+  " " + lotemp + " " + cantidad + " " + persona + observaciones + fechahora;
     }
 }

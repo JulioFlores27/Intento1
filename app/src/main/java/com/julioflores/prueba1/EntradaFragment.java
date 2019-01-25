@@ -36,19 +36,20 @@ public class EntradaFragment extends Fragment {
         bu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObtenerAlmacenes();
-                mp1.setText("");
-                nl1.setText("");
-                c1.setText("");
-                u1.setText("");
+                if(mp1.getText().toString().isEmpty() || nl1.getText().toString().isEmpty() || c1.getText().toString().isEmpty() || u1.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity(), "Favor de ingresar datos",Toast.LENGTH_SHORT).show();
+                }else {
+                    ObtenerAlmacenes();
+                    mp1.setText("");
+                    nl1.setText("");
+                    c1.setText("");
+                    u1.setText("");
+                }
             }
         });
         return v;
     }
     private void ObtenerAlmacenes(){
-//        if(){
-//
-//        }
         String obs = " ";
         Date fechahora = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -58,25 +59,22 @@ public class EntradaFragment extends Fragment {
         String a = separated[0];
         String b = separated[1];
         String c = separated[2];
-        String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_insertar.php?Rack="+ a.replaceAll(" ", "%20") +
-                "&Fila="+ b.replaceAll(" ", "%20") +
-                "&Columna="+ c.replaceAll(" ", "%20") +
-                "&MateriaPrima="+ mp1.getText().toString().replaceAll(" ", "%20") +
-                "&LoteMP="+ nl1.getText().toString().replaceAll(" ", "%20") +
-                "&Cantidad="+ c1.getText().toString().replaceAll(" ", "%20") +
-                "&Persona=" + obs.replaceAll(" ", "%20") +
-                "&Observaciones=" + obs.replaceAll(" ", "%20") +
-                "&FechayHora=" + dias.replaceAll(" ", "%20");
-        Toast.makeText(getActivity(), "Sus datos se han guardado",Toast.LENGTH_SHORT).show();
-        cliente.post(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                if(statusCode == 200){
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            }
-        });
+            Toast.makeText(getActivity(), "Favor de ingresar datos",Toast.LENGTH_SHORT).show();
+            String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_insertar.php?Rack="+ a.replaceAll(" ", "%20") +
+                    "&Fila="+ b.replaceAll(" ", "%20") +
+                    "&Columna="+ c.replaceAll(" ", "%20") +
+                    "&MateriaPrima="+ mp1.getText().toString().replaceAll(" ", "%20") +
+                    "&LoteMP="+ nl1.getText().toString().replaceAll(" ", "%20") +
+                    "&Cantidad="+ c1.getText().toString().replaceAll(" ", "%20") +
+                    "&Persona=" + obs.replaceAll(" ", "%20") +
+                    "&Observaciones=" + obs.replaceAll(" ", "%20") +
+                    "&FechayHora=" + dias.replaceAll(" ", "%20");
+            Toast.makeText(getActivity(), "Sus datos se han guardado",Toast.LENGTH_SHORT).show();
+            cliente.post(url, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) { if(statusCode == 200){ } }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) { }
+            });
     }
 }

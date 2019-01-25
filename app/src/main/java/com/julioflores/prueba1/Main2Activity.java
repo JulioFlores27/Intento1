@@ -32,6 +32,8 @@ public class Main2Activity extends ArrayAdapter<Almacen> {
         t2.setText(String.valueOf(almacen.getRack()+"-"+almacen.getFila()+"-"+almacen.getColumna()));
         TextView t3 = (TextView) listItemView.findViewById(R.id.cantidad2);
         t3.setText(String.valueOf(almacen.getCantidad()));
+        TextView t4 = (TextView) listItemView.findViewById(R.id.materiapri2);
+        t4.setText(almacen.getMateriaprima());
         return listItemView;
     }
 }
