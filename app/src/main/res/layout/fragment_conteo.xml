@@ -1,95 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConteoFragment">
-    <TextView
-        android:layout_width="85pt"
-        android:text="Ubicación: "
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:textSize="25dp"
-        android:layout_height="20pt"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="5dp"/>
-    <EditText
-        android:id="@+id/ubicacion3"
-        android:layout_width="75pt"
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:layout_height="25pt"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="200dp"/>
-    <TextView
-        android:layout_width="85pt"
-        android:text="Materia Prima: "
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:textSize="25dp"
-        android:layout_height="20pt"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="5dp"/>
-    <EditText
-        android:id="@+id/matpri3"
-        android:layout_width="75pt"
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:layout_height="25pt"
-        android:textSize="20dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="200dp"/>
-    <TextView
-        android:layout_width="85pt"
-        android:layout_height="20pt"
-        android:text="No. Lote: "
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:textSize="25dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginLeft="5dp"/>
-    <EditText
-        android:id="@+id/lote3"
-        android:layout_width="75pt"
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:layout_height="25pt"
-        android:textSize="20dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginLeft="200dp"/>
-    <TextView
-        android:layout_width="85pt"
-        android:layout_height="20pt"
-        android:text="Cantidad: "
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:textSize="25dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginLeft="5dp"/>
-    <EditText
-        android:id="@+id/cantidad3"
-        android:layout_width="75pt"
-        android:textColor="@android:color/black"
-        android:layout_gravity="left"
-        android:layout_height="25pt"
-        android:textSize="20dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginLeft="200dp"/>
-    <Button
-        android:id="@+id/b1"
-        android:layout_width="80pt"
-        android:layout_height="20pt"
-        android:layout_gravity="left"
-        android:layout_marginTop="300dp"
-        android:text="Agregar otra MP"
-        android:layout_marginLeft="10dp"/>
-    <Button
-        android:id="@+id/b2"
-        android:layout_width="80pt"
-        android:layout_height="20pt"
-        android:layout_gravity="right"
-        android:layout_marginTop="300dp"
-        android:text="Terminar Ubicación"
-        android:layout_marginRight="10dp"/>
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Ubicación:"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
+                <EditText
+                    android:id="@+id/ubicacion_conteo"
+                    android:layout_width="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="left"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="date|numberDecimal"
+                    android:layout_weight="1"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Checar"
+                    android:id="@+id/btn_checar_ubicacion" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/materia_prima"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    />
+                <EditText
+                    android:id="@+id/matpri3"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="left"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textFilter|textCapCharacters"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Lote:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/lote3"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="left"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textFilter|textCapCharacters"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="Cantidad:"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/cantidad_conteo"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:layout_gravity="left"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:inputType="textFilter|textCapCharacters"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/b12conteo"
+                    android:layout_width="90pt"
+                    android:layout_height="20pt"
+                    android:layout_gravity="left"
+                    android:text="Agregar otra MP" />
+                <Button
+                    android:id="@+id/b22conteo"
+                    android:layout_width="90pt"
+                    android:layout_height="20pt"
+                    android:layout_gravity="right"
+                    android:text="Terminar Ubicación" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ListView
+                    android:id="@+id/listaconteo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

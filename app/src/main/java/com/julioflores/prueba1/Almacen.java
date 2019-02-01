@@ -1,12 +1,13 @@
 package com.julioflores.prueba1;
 
 public class Almacen {
-    private int id, rack, fila, columna, lotemp, cantidad;
+    private int id, rack, fila, columna, lotemp;
+    Double cantidad;
     private String materiaprima, persona, observaciones, fechahora;
 
     public Almacen(){ }
 
-    public Almacen(int id, int rack, int fila, int columna, int lotemp, int cantidad, String materiaprima, String persona, String observaciones, String fechahora) {
+    public Almacen(int id, int rack, int fila, int columna, int lotemp, Double cantidad, String materiaprima, String persona, String observaciones, String fechahora) {
         this.id = id;
         this.rack = rack;
         this.fila = fila;
@@ -59,11 +60,11 @@ public class Almacen {
         this.lotemp = lotemp;
     }
 
-    public int getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

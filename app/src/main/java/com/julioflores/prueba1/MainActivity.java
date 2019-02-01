@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     ConteoFragment conteos = new ConteoFragment();
                     return conteos;
                 case 3:
-                    EntradaFragment movimientos = new EntradaFragment();
+                    ReacomodoFragment movimientos = new ReacomodoFragment();
                     return movimientos;
             }
             return null;

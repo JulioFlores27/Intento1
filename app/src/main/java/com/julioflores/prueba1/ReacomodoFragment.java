@@ -9,60 +9,64 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+
 import org.json.JSONArray;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import cz.msebera.android.httpclient.Header;
 
-public class SalidasFragment extends Fragment {
+public class ReacomodoFragment extends Fragment {
+
     Main2Activity adaptadores;
     SwipeRefreshLayout swipere;
     ListView lista2;
     AsyncHttpClient cliente;
-    Button boton1, boton2;
-    EditText matepri2;
-    EditText conpro2;
+    EditText matepri_reacomodo;
+    EditText ubicacion_reacomodo;
     String usuario;
-
     ArrayAdapter a;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View observar = inflater.inflate(R.layout.fragment_salidas, container, false);
-        lista2 = (ListView) observar.findViewById(R.id.listasa);
-        boton1 = (Button) observar.findViewById(R.id.b12);
-        boton2 = (Button) observar.findViewById(R.id.b22);
-        matepri2 = (EditText) observar.findViewById(R.id.matpri2);
-        conpro2 = (EditText) observar.findViewById(R.id.conprod2);
-        swipere = observar.findViewById(R.id.swiperefrescar);
+        View observar = inflater.inflate(R.layout.fragment_reacomodo, container, false);
+        lista2 = (ListView) observar.findViewById(R.id.listareacomodo);
+
+        matepri_reacomodo = (EditText) observar.findViewById(R.id.matprireacomodo);
+        ubicacion_reacomodo = (EditText) observar.findViewById(R.id.ubicacion_reacomodo);
+
+        swipere = observar.findViewById(R.id.swipereacomodar);
         cliente = new AsyncHttpClient();
+
         //usuario = "Javier Belausteguigoitia";
         //usuario = "Danya López";
         //usuario = "Tablet";
         //usuario = "Edgar Cruz";
         usuario = "Juan Antonio Muñoz";
         //usuario = "Edgar Gallardo";
+
         ObtenerAlmacen();
         return observar;
     }
 
     private void ObtenerAlmacen(){
-        if (matepri2.getText().toString().isEmpty()) {
+        if (matepri_reacomodo.getText().toString().isEmpty()) {
             String url = "https://appsionmovil.000webhostapp.com/Almacenmp.php";
             cliente.post(url, new AsyncHttpResponseHandler() {
                 @Override
@@ -74,7 +78,7 @@ public class SalidasFragment extends Fragment {
             });
         }else{
             CharSequence buscar;
-            String buscar1 = matepri2.getText().getFilters().toString();
+            String buscar1 = matepri_reacomodo.getText().getFilters().toString();
             //Toast.makeText(getActivity(), buscar, Toast.LENGTH_SHORT).show();
             String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_consultar.php?MateriaPrima="+ buscar1;
             cliente.post(url, new AsyncHttpResponseHandler() {
@@ -89,10 +93,12 @@ public class SalidasFragment extends Fragment {
     }
 
     private void ObtenerAlmacen2(){
-        String buscar2 = matepri2.getText().toString();
+
+        String buscar2 = matepri_reacomodo.getText().toString();
         //Toast.makeText(getActivity(), buscar, Toast.LENGTH_SHORT).show();
         String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_consultar2.php?MateriaPrima="+ buscar2;
         //Toast.makeText(getActivity(), url, Toast.LENGTH_SHORT).show();
+
         cliente.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -124,7 +130,7 @@ public class SalidasFragment extends Fragment {
             }
             adaptadores = new Main2Activity(getActivity(), lista);
             lista2.setAdapter(adaptadores);
-            matepri2.addTextChangedListener(new TextWatcher() {
+            matepri_reacomodo.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 @Override
@@ -141,25 +147,22 @@ public class SalidasFragment extends Fragment {
                     ConnectivityManager conectividad1 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo lanets = conectividad1.getActiveNetworkInfo();
                     if(lanets != null && lanets.isConnected()) {
-                        matepri2.addTextChangedListener(new TextWatcher() {
+                        matepri_reacomodo.addTextChangedListener(new TextWatcher() {
                             @Override
                             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                             @Override
                             public void onTextChanged(CharSequence s, int start, int before, int count) {
                                 adaptadores.getFilter().filter(s);
-                                swipere.setRefreshing(false);
                             }
                             @Override
                             public void afterTextChanged(Editable s) { }
                         });
                         //ObtenerAlmacen();
-                        boton1.setVisibility(View.VISIBLE);
-                        boton2.setVisibility(View.VISIBLE);
+
                         swipere.setRefreshing(false);
                     }else{
                         Toast.makeText(getActivity(), "No hay Internet, intentarlo más tarde o verifica su conexión",Toast.LENGTH_SHORT).show();
-                        boton1.setVisibility(View.INVISIBLE);
-                        boton2.setVisibility(View.INVISIBLE);
+
                         swipere.setRefreshing(false);
                     }
                 }
@@ -168,9 +171,9 @@ public class SalidasFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     final Almacen valor1 = (Almacen) lista2.getItemAtPosition(position);
                     AlertDialog.Builder mibuild = new AlertDialog.Builder(getActivity());
-                    final View mview = getLayoutInflater().inflate(R.layout.operacion, null);
-                    mibuild.setTitle("Cantidades Restantes");
-                    mibuild.setMessage("Surtido:");
+                    final View mview = getLayoutInflater().inflate(R.layout.dialogo_reacomodo, null);
+                    mibuild.setTitle("Nuevo acomodo");
+
                     final String rak = String.valueOf(valor1.getRack());
                     final String fil = String.valueOf(valor1.getFila());
                     final String col = String.valueOf(valor1.getColumna());
@@ -178,25 +181,38 @@ public class SalidasFragment extends Fragment {
                     final String lmp = String.valueOf(valor1.getLotemp());
                     final Double primervalor = valor1.getCantidad();
                     final String per = valor1.getPersona();
-                    final String cprod = conpro2.getText().toString();
+                    final String cprod = "Reacomodo";
                     final String val3 = String.valueOf(primervalor);
+                    final String valor = String.valueOf(primervalor);
+                    final EditText op1 = (EditText) mview.findViewById(R.id.cantidad_reacomodo);
+                    op1.setText(valor);
                     if (primervalor == 0) {
                         Toast.makeText(getActivity(), "Esta Operación se ha terminado", Toast.LENGTH_SHORT).show();
-                    }else if(conpro2.getText().toString().isEmpty()){
-                        Toast.makeText(getActivity(), "Ingresar lote de salida", Toast.LENGTH_SHORT).show();
-
-                    }else if(conpro2.getText().toString().length()<5 || conpro2.getText().toString().length()>6){
-                        Toast.makeText(getActivity(), "Revisar lote", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         final AlertDialog.Builder builder = mibuild.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                EditText op1 = (EditText) mview.findViewById(R.id.operacion1);
+                                String op11 = op1.getText().toString();
+                                op1.setText(op11);
+                                EditText op2 = (EditText) mview.findViewById(R.id.ubicacion_reacomodo);
+                                String ubibacion_nueva = op2.getText().toString();
+
+
+                                String[] ubicacion = ubibacion_nueva.split("-");
+                                String rack_nuevo = ubicacion[0];
+                                String fila_nueva = ubicacion[1];
+                                String columna_nueva = ubicacion[2];
+
+
+
                                 Date fechahora = Calendar.getInstance().getTime();
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                                 String dias = dateFormat.format(fechahora);
                                 String val1 = op1.getText().toString();
+                                Double valor_negativo = Double.parseDouble(val1)*-1;
+
+
+                                String valor_neg_string = valor_negativo.toString();
                                 Double val2 = Double.parseDouble(val1);
                                 Double restar = primervalor - val2;
                                 String total = String.valueOf(restar);
@@ -204,17 +220,21 @@ public class SalidasFragment extends Fragment {
                                     Toast.makeText(getActivity(), "Es un valor nulo", Toast.LENGTH_SHORT).show();
                                     dialog.cancel();
                                 } else if (val2 <= primervalor) {
-                                    String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_CantidadOperacion.php?Rack=" + rak +
+                                    String url = "https://appsionmovil.000webhostapp.com/AlmacenMP_reacomodo.php?Rack=" + rak +
                                             "&Fila=" + fil + "&Columna="+ col +"&MateriaPrima="+ mp.replaceAll(" ","%20")+
-                                            "&LoteMP="+ lmp +"&Cantidad=-"+ val1 +"&Persona="+ usuario.replaceAll(" ", "%20")+
+                                            "&LoteMP="+ lmp +"&Cantidad="+ valor_negativo +"&Persona="+ usuario.replaceAll(" ", "%20")+
                                             "&Observaciones="+ cprod.replaceAll(" ","%20")+
-                                            "&FechayHora="+ dias.replaceAll(" ","%20");
+                                            "&FechayHora="+ dias.replaceAll(" ","%20")+"&RackNuevo="+rack_nuevo+"&FilaNueva="+fila_nueva+"&ColumnaNueva="+columna_nueva+"&CantidadNueva="+val1;
+
+
+
                                     cliente.post(url, new AsyncHttpResponseHandler() {
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) { if (statusCode == 200) { } }
                                         @Override
                                         public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) { }
                                     });
+                                    ObtenerAlmacen2();
                                     String signorestar = " - ";
                                     String signoigual = " = ";
                                     String url2 = "https://appsionmovil.000webhostapp.com/Almacendatoshistorico.php?MateriaPrima=" + mp +
@@ -231,7 +251,6 @@ public class SalidasFragment extends Fragment {
                                             Toast.makeText(getActivity(),"Error, no se guardaron los datos",Toast.LENGTH_LONG).show();
                                         }
                                     });
-                                    ObtenerAlmacen2();
                                 } else {
                                     Toast.makeText(getActivity(), "Favor de Ingresar una cantidad menor", Toast.LENGTH_SHORT).show();
                                 }

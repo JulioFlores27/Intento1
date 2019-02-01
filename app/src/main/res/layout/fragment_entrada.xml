@@ -7,6 +7,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/boton_scanner"
+            android:layout_width="100pt"
+            android:layout_height="20pt"
+            android:layout_gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Escanear"/>
+
         <TextView
             android:layout_width="85pt"
             android:text="Materia Prima: "
@@ -81,7 +90,7 @@
             android:textSize="20dp"
             android:layout_marginTop="230dp"
             android:layout_marginLeft="200dp"
-            android:inputType="datetime" />
+            android:inputType="date|numberDecimal" />
         <Button
             android:id="@+id/b1"
             android:layout_width="100pt"
