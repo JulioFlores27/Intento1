@@ -48,7 +48,6 @@ public class ConteoFragment extends Fragment {
         String usuario;
 
         Handler customHandler = new Handler();
-
         public class contar extends CountDownTimer {
             public contar(long milienfuturo, long countdowninterval){
                 super(milienfuturo,countdowninterval);
@@ -70,10 +69,15 @@ public class ConteoFragment extends Fragment {
             @Override
             public void run() {
                 contar tiempo = new contar(5000, 5000);
-                tiempo.start();
-                customHandler.postDelayed(this, 5000);
+                if(matepri2.getText().toString().isEmpty()) {
+                    tiempo.start();
+                    customHandler.postDelayed(this, 1000);
+                }else{
+                    tiempo.cancel();
+                }
             }
         };
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View conteo = inflater.inflate(R.layout.fragment_conteo, container, false);
@@ -212,14 +216,11 @@ public class ConteoFragment extends Fragment {
                 swipere.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-
                         if (ubicacion.getText().toString().isEmpty()) {
                             ObtenerAlmacen();
                             swipere.setRefreshing(false);
                         } else {
-
                             if (ubicacion.getText().toString().matches(".-.-.") || ubicacion.getText().toString().matches("..-.-.") || ubicacion.getText().toString().matches(".-.-..")|| ubicacion.getText().toString().matches("..-.-..")) {
-
                                 ObtenerAlmacen3();
                                 ConnectivityManager conectividad1 = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                                 NetworkInfo lanets = conectividad1.getActiveNetworkInfo();
@@ -228,12 +229,10 @@ public class ConteoFragment extends Fragment {
                                         @Override
                                         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                                         }
-
                                         @Override
                                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                                             adaptadores.getFilter().filter(s);
                                         }
-
                                         @Override
                                         public void afterTextChanged(Editable s) {
                                         }
@@ -248,14 +247,14 @@ public class ConteoFragment extends Fragment {
                                     boton2.setVisibility(View.INVISIBLE);
                                     swipere.setRefreshing(false);
                                 }
+                                swipere.setRefreshing(false);
                             } else {
                                 Toast.makeText(getActivity(), "Revisar ubicación", Toast.LENGTH_LONG).show();
                                 swipere.setRefreshing(false);
-
                             }
                         }
+                        swipere.setRefreshing(false);
                     }
-
                 });
 
                 boton1.setOnClickListener(new View.OnClickListener() {

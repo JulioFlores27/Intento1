@@ -157,8 +157,6 @@ public class ReacomodoFragment extends Fragment {
                             @Override
                             public void afterTextChanged(Editable s) { }
                         });
-                        //ObtenerAlmacen();
-
                         swipere.setRefreshing(false);
                     }else{
                         Toast.makeText(getActivity(), "No hay Internet, intentarlo más tarde o verifica su conexión",Toast.LENGTH_SHORT).show();
@@ -196,22 +194,15 @@ public class ReacomodoFragment extends Fragment {
                                 op1.setText(op11);
                                 EditText op2 = (EditText) mview.findViewById(R.id.ubicacion_reacomodo);
                                 String ubibacion_nueva = op2.getText().toString();
-
-
                                 String[] ubicacion = ubibacion_nueva.split("-");
                                 String rack_nuevo = ubicacion[0];
                                 String fila_nueva = ubicacion[1];
                                 String columna_nueva = ubicacion[2];
-
-
-
                                 Date fechahora = Calendar.getInstance().getTime();
                                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                                 String dias = dateFormat.format(fechahora);
                                 String val1 = op1.getText().toString();
                                 Double valor_negativo = Double.parseDouble(val1)*-1;
-
-
                                 String valor_neg_string = valor_negativo.toString();
                                 Double val2 = Double.parseDouble(val1);
                                 Double restar = primervalor - val2;
@@ -225,9 +216,6 @@ public class ReacomodoFragment extends Fragment {
                                             "&LoteMP="+ lmp +"&Cantidad="+ valor_negativo +"&Persona="+ usuario.replaceAll(" ", "%20")+
                                             "&Observaciones="+ cprod.replaceAll(" ","%20")+
                                             "&FechayHora="+ dias.replaceAll(" ","%20")+"&RackNuevo="+rack_nuevo+"&FilaNueva="+fila_nueva+"&ColumnaNueva="+columna_nueva+"&CantidadNueva="+val1;
-
-
-
                                     cliente.post(url, new AsyncHttpResponseHandler() {
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) { if (statusCode == 200) { } }
