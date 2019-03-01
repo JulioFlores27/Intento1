@@ -90,7 +90,7 @@
             android:textSize="20dp"
             android:layout_marginTop="230dp"
             android:layout_marginLeft="200dp"
-            android:inputType="date|numberDecimal" />
+            android:inputType="date" />
         <Button
             android:id="@+id/b1"
             android:layout_width="100pt"

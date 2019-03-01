@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -39,8 +41,38 @@ public class SalidasFragment extends Fragment {
     EditText matepri2;
     EditText conpro2;
     String usuario;
-
     ArrayAdapter a;
+
+    Handler customHandler = new Handler();
+    public class contar extends CountDownTimer {
+        public contar(long milienfuturo, long countdowninterval){
+            super(milienfuturo,countdowninterval);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if(matepri2.getText().toString().isEmpty()){
+                ObtenerAlmacen();
+            }else{
+                customHandler.removeCallbacks(actualizartimer);
+                customHandler.removeCallbacks(actualizartimer);
+            }
+        }
+        public void onFinish(){
+            //Toast.makeText(getActivity(), "Actualizado",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private Runnable actualizartimer = new Runnable() {
+        @Override
+        public void run() {
+            SalidasFragment.contar tiempo = new SalidasFragment.contar(5000, 5000);
+            if(matepri2.getText().toString().isEmpty()) {
+                tiempo.start();
+                customHandler.postDelayed(this, 1000);
+            }else{
+                tiempo.cancel();
+            }
+        }
+    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View observar = inflater.inflate(R.layout.fragment_salidas, container, false);
@@ -50,6 +82,7 @@ public class SalidasFragment extends Fragment {
         matepri2 = (EditText) observar.findViewById(R.id.matpri2);
         conpro2 = (EditText) observar.findViewById(R.id.conprod2);
         swipere = observar.findViewById(R.id.swiperefrescar);
+        customHandler.postDelayed(actualizartimer, 1000);
         cliente = new AsyncHttpClient();
         //usuario = "Javier Belausteguigoitia";
         //usuario = "Danya López";
@@ -147,7 +180,6 @@ public class SalidasFragment extends Fragment {
                             @Override
                             public void onTextChanged(CharSequence s, int start, int before, int count) {
                                 adaptadores.getFilter().filter(s);
-                                swipere.setRefreshing(false);
                             }
                             @Override
                             public void afterTextChanged(Editable s) { }
@@ -177,7 +209,6 @@ public class SalidasFragment extends Fragment {
                     final String mp = valor1.getMateriaprima();
                     final String lmp = String.valueOf(valor1.getLotemp());
                     final Double primervalor = valor1.getCantidad();
-                    final String per = valor1.getPersona();
                     final String cprod = conpro2.getText().toString();
                     final String val3 = String.valueOf(primervalor);
                     if (primervalor == 0) {

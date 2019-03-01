@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -43,6 +45,37 @@ public class ReacomodoFragment extends Fragment {
     String usuario;
     ArrayAdapter a;
 
+    Handler customHandler = new Handler();
+    public class contar extends CountDownTimer {
+        public contar(long milienfuturo, long countdowninterval){
+            super(milienfuturo,countdowninterval);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if(matepri_reacomodo.getText().toString().isEmpty()){
+                ObtenerAlmacen();
+            }else{
+                customHandler.removeCallbacks(actualizartimer);
+                customHandler.removeCallbacks(actualizartimer);
+            }
+        }
+        public void onFinish(){
+            //Toast.makeText(getActivity(), "Actualizado",Toast.LENGTH_SHORT).show();
+        }
+    }
+    private Runnable actualizartimer = new Runnable() {
+        @Override
+        public void run() {
+            ReacomodoFragment.contar tiempo = new ReacomodoFragment.contar(5000, 5000);
+            if(matepri_reacomodo.getText().toString().isEmpty()) {
+                tiempo.start();
+                customHandler.postDelayed(this, 1000);
+            }else{
+                tiempo.cancel();
+            }
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View observar = inflater.inflate(R.layout.fragment_reacomodo, container, false);
@@ -50,7 +83,7 @@ public class ReacomodoFragment extends Fragment {
 
         matepri_reacomodo = (EditText) observar.findViewById(R.id.matprireacomodo);
         ubicacion_reacomodo = (EditText) observar.findViewById(R.id.ubicacion_reacomodo);
-
+        customHandler.postDelayed(actualizartimer, 1000);
         swipere = observar.findViewById(R.id.swipereacomodar);
         cliente = new AsyncHttpClient();
 
@@ -160,7 +193,6 @@ public class ReacomodoFragment extends Fragment {
                         swipere.setRefreshing(false);
                     }else{
                         Toast.makeText(getActivity(), "No hay Internet, intentarlo más tarde o verifica su conexión",Toast.LENGTH_SHORT).show();
-
                         swipere.setRefreshing(false);
                     }
                 }
